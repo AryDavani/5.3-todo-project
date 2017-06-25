@@ -17,9 +17,9 @@
 
       <h4>Current Todos:</h4>
       {{#todos}}
-        <form class="" action="/" method="post">
+        <form class="" action="/{{id}}" method="post">
           <input type="submit" name="" value="Mark Complete">
-          <span>{{todo}}</span>
+          <span>{{.}}</span>
         </form>
       {{/todos}}
     </div>

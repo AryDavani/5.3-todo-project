@@ -12,30 +12,30 @@ app.set('views', './views');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
-const todos = [];
+const todos = ['make food', 'eat food'];
 
-app.get("/", function(req, res) {
-  let idx = 0;
+app.get('/', function(req, res) {
 
-  function counter() {
-    return idx++;
+  var idx = 0;
+
+  var context = {
+    todos : todos,
+    id: function(){
+      return idx++;
+    }
   };
-
-  var count = {
-  todos: todos,
-  id: counter()
-  };
-  console.log(count.id);
-  res.render('index', count);
+  res.render('index', context);
 });
 
-app.post("/", function(req, res) {
-  todos.push({todo: req.body.todo});
+app.post('/', function(req, res) {
+  todos.push(req.body.todo);
   res.redirect('/');
 });
 
-app.post("/", function(req, res) {
-  let getid = count.id
+app.post('/:id', function(req, res) {
+  let id = parseInt(req.params.id);
+  todos.splice(id, 1);
+  res.redirect('/');
 });
 
 app.listen(3000);
