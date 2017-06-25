@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path');
 const mustacheExpress = require('mustache-express');
 const bodyParser = require('body-parser');
 
@@ -12,22 +13,29 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
 const todos = [];
-const completedTodos = [];
 
 app.get("/", function(req, res) {
-  res.render('index', { "todos": todos });
+  let idx = 0;
+
+  function counter() {
+    return idx++;
+  };
+
+  var count = {
+  todos: todos,
+  id: counter()
+  };
+  console.log(count.id);
+  res.render('index', count);
 });
 
 app.post("/", function(req, res) {
-  todos.push(req.body);
-  console.log(todos);
+  todos.push({todo: req.body.todo});
   res.redirect('/');
 });
 
 app.post("/", function(req, res) {
-
-  res.redirect('/');
-
-})
+  let getid = count.id
+});
 
 app.listen(3000);
