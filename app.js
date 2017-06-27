@@ -13,6 +13,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
 const todos = ['make food', 'eat food'];
+const completed = [];
 
 app.get('/', function(req, res) {
 
@@ -20,6 +21,7 @@ app.get('/', function(req, res) {
 
   var context = {
     todos : todos,
+    completed: completed,
     id: function(){
       return idx++;
     }
@@ -34,7 +36,7 @@ app.post('/', function(req, res) {
 
 app.post('/:id', function(req, res) {
   let id = parseInt(req.params.id);
-  todos.splice(id, 1);
+  completed.push(todos.splice(id, 1));
   res.redirect('/');
 });
 

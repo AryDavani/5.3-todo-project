@@ -22,6 +22,14 @@
           <span>{{.}}</span>
         </form>
       {{/todos}}
+
+      <h4>Completed Todos</h4>
+      <ul>
+        {{#completed}}
+          <li>{{.}}</li>
+        {{/completed}}
+      </ul>
+
     </div>
 
   </body>
